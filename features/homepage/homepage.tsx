@@ -21,7 +21,11 @@ type ColumnProps = {
 async function LeftColumn({ contents }: ColumnProps) {
   return (
     <div className="space-y-6">
-      {contents.banner && <Banner banner={contents.banner} />}
+      {contents.banner && (
+        <div className="hidden md:block">
+          <Banner banner={contents.banner} />
+        </div>
+      )}
       {contents.contest && <Contests contests={contents.contest[0]} />}
     </div>
   );

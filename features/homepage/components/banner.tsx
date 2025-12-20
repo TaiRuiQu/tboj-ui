@@ -41,7 +41,7 @@ export default function Banner({ banner }: Props) {
                 <img
                   src={pic.src}
                   alt={`Banner ${index + 1}`}
-                  className="h-auto w-full"
+                  className="block h-auto w-full"
                 />
               </div>
             </Link>

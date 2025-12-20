@@ -20,7 +20,7 @@ import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 type LoginFormValues = {
@@ -32,6 +32,33 @@ type LoginFormValues = {
 export function LoginPage() {
   const searchParams = useSearchParams();
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const updateHeightVar = () => {
+      const viewportHeight =
+        window.visualViewport?.height ?? window.innerHeight ?? 0;
+      el.style.setProperty('--app-height', `${Math.round(viewportHeight)}px`);
+    };
+
+    updateHeightVar();
+
+    const visualViewport = window.visualViewport;
+    visualViewport?.addEventListener('resize', updateHeightVar);
+    visualViewport?.addEventListener('scroll', updateHeightVar);
+    window.addEventListener('resize', updateHeightVar);
+    window.addEventListener('orientationchange', updateHeightVar);
+
+    return () => {
+      visualViewport?.removeEventListener('resize', updateHeightVar);
+      visualViewport?.removeEventListener('scroll', updateHeightVar);
+      window.removeEventListener('resize', updateHeightVar);
+      window.removeEventListener('orientationchange', updateHeightVar);
+    };
+  }, []);
 
   const {
     control,
@@ -69,7 +96,11 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div
+      ref={containerRef}
+      style={{ minHeight: 'var(--app-height, 100dvh)' }}
+      className="flex items-start justify-center overflow-y-auto px-4 pt-10 pb-[calc(env(safe-area-inset-bottom)+2.5rem)] sm:items-center sm:py-0"
+    >
       <div className="flex w-full max-w-md flex-col items-center gap-6">
         <Image
           src="/nav-logo-small_light.png"
@@ -77,6 +108,7 @@ export function LoginPage() {
           width={160}
           height={44}
           priority
+          sizes="160px"
         />
 
         <Card className="w-full">
@@ -98,6 +130,9 @@ export function LoginPage() {
                     id="uname"
                     type="text"
                     autoComplete="username"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck={false}
                     placeholder="请输入用户名"
                     aria-invalid={!!errors.uname}
                     disabled={isSubmitting}

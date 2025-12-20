@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 
 interface TwoColumnLayoutProps {
@@ -12,9 +13,11 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   gap = 'gap-8',
 }) => {
   return (
-    <div className={`grid grid-cols-10 ${gap} p-4`}>
-      <div className="col-span-7">{left}</div>
-      <div className="col-span-3">{right}</div>
+    <div
+      className={cn('grid grid-cols-1 items-start p-4 md:grid-cols-10', gap)}
+    >
+      <div className="md:col-span-7">{left}</div>
+      <div className="md:col-span-3">{right}</div>
     </div>
   );
 };
