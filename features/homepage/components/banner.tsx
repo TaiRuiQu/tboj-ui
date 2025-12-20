@@ -2,13 +2,12 @@
 'use client';
 
 import { BannerConfig } from '@/api/server/method/ui/homepage';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
 import Link from 'next/link';
-
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Props = {
   banner: BannerConfig;
@@ -20,7 +19,7 @@ export default function Banner({ banner }: Props) {
   }
 
   return (
-    <div className="w-full mb-6">
+    <div className="mb-6 w-full">
       <Swiper
         autoplay={{
           delay: 5000,
@@ -36,13 +35,13 @@ export default function Banner({ banner }: Props) {
               href={pic.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full h-full"
+              className="block h-full w-full"
             >
               <div className="relative w-full">
                 <img
                   src={pic.src}
                   alt={`Banner ${index + 1}`}
-                  className="w-full h-auto"
+                  className="h-auto w-full"
                 />
               </div>
             </Link>

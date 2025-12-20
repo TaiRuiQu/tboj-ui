@@ -1,6 +1,6 @@
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
+import { Geist, Geist_Mono, Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
     template: '%s - ZYZOJ',
     default: 'ZYZOJ',
   },
-  description: 'A modern, AI-ready online judge platform for competitive programmers.',
+  description:
+    'A modern, AI-ready online judge platform for competitive programmers.',
 };
 
 export default function RootLayout({

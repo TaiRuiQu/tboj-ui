@@ -1,0 +1,81 @@
+export type ContestRule =
+  | 'acm'
+  | 'oi'
+  | 'homework'
+  | 'ioi'
+  | 'ledo'
+  | 'strictioi';
+
+export type ContestFile = {
+  _id: string;
+  name: string;
+  size: number;
+  etag: string;
+  lastModified: Date;
+};
+
+export type BaseContest = {
+  _id: string;
+  docId: string;
+  docType: 30;
+  domainId: string;
+  owner: number;
+  maintainer?: number[];
+  beginAt: Date;
+  endAt: Date;
+  /** 参加人数 */
+  attend: number;
+  title: string;
+  content: string;
+  rule: ContestRule;
+  pids: number[];
+  rated?: boolean;
+  assign?: string[];
+  files?: ContestFile[];
+};
+
+export type Contest = {
+  rule: Exclude<ContestRule, 'homework'>;
+
+  /** ACM 赛制封榜时间 */
+  lockAt?: Date;
+  unlocked?: boolean;
+  /** 气球发放状态记录 */
+  balloon?: Record<number, string>;
+
+  /** 自动隐藏或解除隐藏题目 */
+  autoHide?: boolean;
+  /** 排行榜是否显示真实用户名 */
+  showUsername?: boolean;
+  /** 比赛有效时长 (小时)，用于灵活时间窗口模式 */
+  duration: number;
+  /** 参加所需的最低 Rating */
+  minRating?: number;
+  /** 参加允许的最高 Rating */
+  maxRating?: number;
+  /** 比赛结束后是否允许查看他人代码 */
+  allowViewCode?: boolean;
+} & BaseContest; // 比赛
+
+export type Homework = {
+  /** 作业类型规则固定为 'homework' */
+  rule: 'homework';
+
+  /**
+   * **软截止时间**
+   * 在此时间之前的提交正常计分，此时间到 endAt 之间的提交根据 penaltyRules 扣分
+   */
+  penaltySince?: Date;
+
+  /** 迟交扣分规则配置 */
+  penaltyRules?: Record<string, number>;
+} & BaseContest; // 作业
+
+export const RuleTexts = {
+  acm: 'ACM/ICPC',
+  oi: 'OI',
+  ioi: 'IOI',
+  ledo: '乐多',
+  homework: '作业',
+  strictioi: 'IOI (严格)',
+} as const;

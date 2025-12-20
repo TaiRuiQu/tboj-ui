@@ -1,10 +1,19 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card';
-import type { CountdownConfig, CountdownEvent } from '@/api/server/method/ui/homepage';
-import { HugeiconsIcon } from '@hugeicons/react';
+import type {
+  CountdownConfig,
+  CountdownEvent,
+} from '@/api/server/method/ui/homepage';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card';
+import { cn } from '@/shared/lib/utils';
 import { Clock01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(duration);
 dayjs.extend(customParseFormat);
@@ -12,23 +21,23 @@ dayjs.extend(customParseFormat);
 function EventCountdown({ event }: { event: CountdownEvent }) {
   const now = dayjs();
   const start = dayjs(event.date);
-  const end = start.add(event.duration, 'second');
+  const end = start.add(event.duration, 'day');
 
   let status: 'pending' | 'running' | 'ended' = 'pending';
   let timeText = '';
 
   if (now.isBefore(start)) {
     status = 'pending';
-    const months = start.diff(now, 'month');
-    const days = start.diff(now.add(months, 'month'), 'day');
-    timeText = `${months > 0 ? months + ' 月 ' : ''}${days} 天`;
   } else if (now.isBefore(end)) {
     status = 'running';
-    const months = end.diff(now, 'month');
-    const days = end.diff(now.add(months, 'month'), 'day');
-    timeText = `${months > 0 ? months + ' 月 ' : ''}${days} 天`;
   } else {
     status = 'ended';
+  }
+
+  if (status !== 'ended') {
+    const target = status === 'pending' ? start : end;
+    const dur = dayjs.duration(target.diff(now));
+    timeText = dur.format(dur.months() > 0 ? 'M [月] D [天]' : 'D [天]');
   }
 
   if (status === 'ended') return null;
@@ -36,9 +45,18 @@ function EventCountdown({ event }: { event: CountdownEvent }) {
   return (
     <div className="text-center">
       <span className="text-muted-foreground text-sm">距离 </span>
-      <span className="font-medium text-foreground mx-1 text-sm">{event.name}</span>
-      <span className="text-muted-foreground text-sm">{status === 'pending' ? '开始' : '结束'}还剩 </span>
-      <span className={`text-sm font-bold ml-1 ${status === 'running' ? 'text-red-500' : 'text-primary'}`}>
+      <span className="text-foreground mx-1 text-sm font-medium">
+        {event.name}
+      </span>
+      <span className="text-muted-foreground text-sm">
+        {status === 'pending' ? '开始' : '结束'}还剩{' '}
+      </span>
+      <span
+        className={cn(
+          'ml-1 text-sm font-bold',
+          status === 'running' ? 'text-red-500' : 'text-primary'
+        )}
+      >
         {timeText}
       </span>
     </div>
@@ -46,15 +64,15 @@ function EventCountdown({ event }: { event: CountdownEvent }) {
 }
 
 export default function Countdown({ config }: { config: CountdownConfig }) {
-  const events = (Array.isArray(config.events) ? config.events : [config.events])
-    .sort((a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf());
-
+  const events = config.events.sort(
+    (a, b) => dayjs(a.date).valueOf() - dayjs(b.date).valueOf()
+  );
   if (!events.length) return null;
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 text-base">
           <HugeiconsIcon icon={Clock01Icon} className="size-5" />
           倒计时
         </CardTitle>

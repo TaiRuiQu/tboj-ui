@@ -1,7 +1,3 @@
-import { redirect } from 'next/navigation';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
-
 import {
   Avatar,
   AvatarFallback,
@@ -12,8 +8,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/components/ui/sidebar';
-import avatarUrl from '@/shared/lib/avatarUrl';
+import avatarUrl from '@/shared/lib/avatar-url';
 import { type User } from '@/shared/types/user';
+import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { redirect } from 'next/navigation';
 
 export function SidebarUser({ user }: { user: User | null | undefined }) {
   if (!user?._id) {
@@ -28,10 +27,7 @@ export function SidebarUser({ user }: { user: User | null | undefined }) {
           className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
         >
           <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarImage
-              src={avatarUrl(user.avatar)}
-              alt={user.uname}
-            />
+            <AvatarImage src={avatarUrl(user.avatar)} alt={user.uname} />
             <AvatarFallback className="rounded-lg">
               {user.uname.slice(0, 2).toUpperCase()}
             </AvatarFallback>

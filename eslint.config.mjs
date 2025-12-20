@@ -1,6 +1,7 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -13,13 +14,7 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
   ]),
-  {
-    rules: {
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'always'],
-      'indent': ['error', 2],
-    },
-  },
+  prettier,
 ]);
 
 export default eslintConfig;

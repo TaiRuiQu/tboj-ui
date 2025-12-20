@@ -1,8 +1,5 @@
 'use client';
 
-import * as React from 'react';
-import Link from 'next/link';
-import { useSelectedLayoutSegments } from 'next/navigation';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +8,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/shared/components/ui/breadcrumb';
+import Link from 'next/link';
+import { useSelectedLayoutSegments } from 'next/navigation';
+import * as React from 'react';
 
 const BREADCRUMB_NAME_MAP: Record<string, string> = {
   home: '首页',
@@ -44,7 +44,7 @@ export function Breadcrumbs() {
             <Link href="/home">ZYZOJ</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        
+
         {segments.map((segment, index) => {
           // Skip 'home' if it is the first segment to avoid duplication
           if (segment === 'home' && index === 0) return null;

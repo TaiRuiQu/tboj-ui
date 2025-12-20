@@ -20,5 +20,5 @@ export const alova = createAlova({
   cacheLogger: false,
   cacheFor: {
     GET: 0,
-  }
+  },
 });

@@ -1,6 +1,18 @@
-import Link from 'next/link';
-
-import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
+import { SidebarUser } from './sidebar-user';
+import ServerApis from '@/api/server/method';
+import { type NavItem } from '@/api/server/method/ui/nav';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarTrigger,
+} from '@/shared/components/ui/sidebar';
 import {
   Award01Icon,
   Chat01Icon,
@@ -15,22 +27,9 @@ import {
   RankingIcon,
   Settings01Icon,
 } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import Image from 'next/image';
-import { type NavItem } from '@/api/server/method/ui/nav';
-import ServerApis from '@/api/server/method';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarTrigger,
-} from '@/shared/components/ui/sidebar';
-import { SidebarUser } from './sidebar-user';
+import Link from 'next/link';
 
 const NAV_ROUTE_MAP: Record<string, string> = {
   homepage: '/home',
@@ -84,15 +83,15 @@ const buildHref = (item: NavItem) => {
   const query =
     item.args.query && typeof item.args.query === 'object'
       ? new URLSearchParams(
-        Object.entries(item.args.query).reduce<Record<string, string>>(
-          (acc, [key, value]) => {
-            if (value === undefined || value === null) return acc;
-            acc[key] = String(value);
-            return acc;
-          },
-          {}
-        )
-      ).toString()
+          Object.entries(item.args.query).reduce<Record<string, string>>(
+            (acc, [key, value]) => {
+              if (value === undefined || value === null) return acc;
+              acc[key] = String(value);
+              return acc;
+            },
+            {}
+          )
+        ).toString()
       : '';
   return query ? `${base}?${query}` : base;
 };

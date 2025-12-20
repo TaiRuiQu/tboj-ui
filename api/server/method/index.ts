@@ -7,4 +7,3 @@ const ServerApis = {
 };
 
 export default ServerApis;
-

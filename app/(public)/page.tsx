@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import { getNavInfos } from '@/api/server/method/ui/nav';
 import { Button } from '@/shared/components/ui/button';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { getNavInfos } from '@/api/server/method/ui/nav';
 
 export const metadata: Metadata = {
   title: '首页',
@@ -17,7 +17,7 @@ export default async function IndexPage() {
 
   return (
     <div
-      className="h-screen container mx-auto flex items-center justify-center"
+      className="container mx-auto flex h-screen items-center justify-center"
       id="landing-container"
     >
       <div className="space-y-2">

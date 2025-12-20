@@ -1,0 +1,21 @@
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/shared/components/ui/avatar';
+import avatarUrl from '@/shared/lib/avatar-url';
+import { BaseUser } from '@/shared/types/user';
+import { type ComponentProps } from 'react';
+
+type Props = ComponentProps<typeof Avatar> & {
+  user: BaseUser;
+};
+
+export default function UserAvatar({ user, ...props }: Props) {
+  return (
+    <Avatar {...props}>
+      <AvatarImage src={avatarUrl(user.avatar)} alt={user.uname} />
+      <AvatarFallback>{user.uname.slice(0, 1).toUpperCase()}</AvatarFallback>
+    </Avatar>
+  );
+}

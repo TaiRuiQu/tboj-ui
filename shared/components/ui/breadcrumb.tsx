@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { Slot } from 'radix-ui';
-
 import { cn } from '@/shared/lib/utils';
+import {
+  ArrowRight01Icon,
+  MoreHorizontalCircle01Icon,
+} from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowRight01Icon, MoreHorizontalCircle01Icon } from '@hugeicons/core-free-icons';
+import { Slot } from 'radix-ui';
+import * as React from 'react';
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -21,7 +23,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
     <ol
       data-slot="breadcrumb-list"
       className={cn(
-        'text-muted-foreground gap-1.5 text-sm flex flex-wrap items-center wrap-break-word',
+        'text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm wrap-break-word',
         className
       )}
       {...props}
@@ -33,7 +35,7 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li
       data-slot="breadcrumb-item"
-      className={cn('gap-1 inline-flex items-center', className)}
+      className={cn('inline-flex items-center gap-1', className)}
       {...props}
     />
   );
@@ -44,7 +46,7 @@ function BreadcrumbLink({
   className,
   ...props
 }: React.ComponentProps<'a'> & {
-  asChild?: boolean
+  asChild?: boolean;
 }) {
   const Comp = asChild ? Slot.Root : 'a';
 
@@ -83,9 +85,7 @@ function BreadcrumbSeparator({
       className={cn('[&>svg]:size-3.5', className)}
       {...props}
     >
-      {children ?? (
-        <HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2} />
-      )}
+      {children ?? <HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2} />}
     </li>
   );
 }
@@ -100,7 +100,7 @@ function BreadcrumbEllipsis({
       role="presentation"
       aria-hidden="true"
       className={cn(
-        'size-5 [&>svg]:size-4 flex items-center justify-center',
+        'flex size-5 items-center justify-center [&>svg]:size-4',
         className
       )}
       {...props}

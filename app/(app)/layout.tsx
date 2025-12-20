@@ -1,7 +1,7 @@
-import AppSidebar from '@/features/navigation/sidebar';
-import { SidebarInset, SidebarProvider } from '@/shared/components/ui/sidebar';
 import { Breadcrumbs } from '@/features/navigation/breadcrumbs';
 import { CollapsedTrigger } from '@/features/navigation/collapsed-trigger';
+import AppSidebar from '@/features/navigation/sidebar';
+import { SidebarInset, SidebarProvider } from '@/shared/components/ui/sidebar';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (

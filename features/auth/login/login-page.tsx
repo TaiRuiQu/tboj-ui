@@ -1,10 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-
 import { Login } from '@/api/client/method/auth/login';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -23,6 +18,10 @@ import {
 } from '@/shared/components/ui/field';
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 type LoginFormValues = {
   uname: string;
@@ -87,7 +86,11 @@ export function LoginPage() {
           </CardHeader>
 
           <CardContent>
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form
+              className="space-y-4"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+            >
               <Field>
                 <FieldLabel htmlFor="uname">用户名</FieldLabel>
                 <FieldContent>
@@ -141,7 +144,7 @@ export function LoginPage() {
               </div>
 
               {submitError && (
-                <p className="text-sm text-destructive">{submitError}</p>
+                <p className="text-destructive text-sm">{submitError}</p>
               )}
 
               <Button type="submit" className="w-full" disabled={isSubmitting}>
