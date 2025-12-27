@@ -1,3 +1,5 @@
+import { FileInfo } from './file';
+
 export type ContestRule =
   | 'acm'
   | 'oi'
@@ -5,14 +7,6 @@ export type ContestRule =
   | 'ioi'
   | 'ledo'
   | 'strictioi';
-
-export type ContestFile = {
-  _id: string;
-  name: string;
-  size: number;
-  etag: string;
-  lastModified: Date;
-};
 
 export type BaseContest = {
   _id: string;
@@ -31,7 +25,7 @@ export type BaseContest = {
   pids: number[];
   rated?: boolean;
   assign?: string[];
-  files?: ContestFile[];
+  files?: FileInfo[];
 };
 
 export type Contest = {

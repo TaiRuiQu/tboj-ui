@@ -2,6 +2,7 @@ import Banner from './components/banner';
 import RecentBlogs from './components/blogs';
 import Contests from './components/contests';
 import Countdown from './components/countdown';
+import Discussions from './components/discussions';
 import ServerApis from '@/api/server/method';
 import type { SectionType } from '@/api/server/method/ui/homepage';
 import TwoColumnLayout from '@/shared/layout/two-column';
@@ -18,7 +19,7 @@ type ColumnProps = {
   bulletin?: string;
 };
 
-async function LeftColumn({ contents }: ColumnProps) {
+async function LeftColumn({ contents, udict }: ColumnProps) {
   return (
     <div className="space-y-6">
       {contents.banner && (
@@ -27,6 +28,9 @@ async function LeftColumn({ contents }: ColumnProps) {
         </div>
       )}
       {contents.contest && <Contests contests={contents.contest[0]} />}
+      {contents.discussion && (
+        <Discussions discussions={contents.discussion[0]} udict={udict} />
+      )}
     </div>
   );
 }

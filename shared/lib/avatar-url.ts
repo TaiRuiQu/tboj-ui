@@ -12,5 +12,6 @@ const providers: Record<string, (id: string, size?: number) => string> = {
 export default function avatarUrl(avatar: string, size = 64): string {
   if (!avatar || avatar.split(':').length < 2) return '';
   const provider = avatar.split(':')[0];
+  if (!providers[provider]) return '';
   return providers[provider](avatar.slice(provider.length + 1), size);
 }

@@ -1,6 +1,8 @@
+import { ObjectId } from './shared';
+
 export type Discussion = {
-  _id: string;
-  docId: string;
+  _id: ObjectId;
+  docId: ObjectId;
 
   docType: 21;
   domainId: string;
@@ -9,7 +11,7 @@ export type Discussion = {
   /** 父级类型 (例如: 10 代表题目, 30 代表比赛) */
   parentType: number;
   /** 父级 ID (关联的题目、比赛等的 ID) */
-  parentId: string | number;
+  parentId: ObjectId | number;
 
   title: string;
   content: string;
@@ -22,4 +24,15 @@ export type Discussion = {
   react: Record<string, number>;
   lock?: boolean;
   hidden?: boolean;
+};
+
+export type Node = {
+  title: string;
+  _id: ObjectId;
+  content: string;
+  domainId: string;
+  docId: string;
+  docType: 20;
+  type: 20;
+  id: string;
 };

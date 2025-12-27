@@ -33,7 +33,7 @@ import Link from 'next/link';
 
 const NAV_ROUTE_MAP: Record<string, string> = {
   homepage: '/home',
-  problem_main: '/p',
+  problem_main: '/problem',
   training_main: '/training',
   contest_main: '/contest',
   homework_main: '/homework',

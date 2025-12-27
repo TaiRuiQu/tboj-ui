@@ -1,4 +1,3 @@
-import { Breadcrumbs } from '@/features/navigation/breadcrumbs';
 import { CollapsedTrigger } from '@/features/navigation/collapsed-trigger';
 import AppSidebar from '@/features/navigation/sidebar';
 import { SidebarInset, SidebarProvider } from '@/shared/components/ui/sidebar';
@@ -11,7 +10,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <AppSidebar />
       <SidebarInset className="p-4">
         <CollapsedTrigger />
-        <div className="container mx-auto max-w-[1600px]">
+        <div className="container mx-auto max-w-[1500px]">
           <div className="mb-2 flex md:hidden px-2">
             <Link href="/home" aria-label="ZYZOJ">
               <Image
@@ -23,9 +22,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               />
             </Link>
           </div>
-          <header className="flex shrink-0 items-center gap-2">
-            <Breadcrumbs />
-          </header>
           <main id="app-body">
             <div>{children}</div>
           </main>
