@@ -3,6 +3,7 @@ import RecentBlogs from './components/blogs';
 import Contests from './components/contests';
 import Countdown from './components/countdown';
 import Discussions from './components/discussions';
+import Suggestions from './components/suggestions';
 import ServerApis from '@/api/server/method';
 import type { SectionType } from '@/api/server/method/ui/homepage';
 import TwoColumnLayout from '@/shared/layout/two-column';
@@ -39,6 +40,7 @@ async function RightColumn({ contents, udict }: ColumnProps) {
   return (
     <div className="space-y-6">
       {contents.countdown && <Countdown config={contents.countdown} />}
+      {contents.suggestions && <Suggestions sections={contents.suggestions} />}
       {contents.recent_blogs && (
         <RecentBlogs blogs={contents.recent_blogs} udict={udict} />
       )}

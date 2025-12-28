@@ -6,6 +6,7 @@ import {
   MoreHorizontalCircle01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import Link from 'next/link';
 import * as React from 'react';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
@@ -40,7 +41,7 @@ function PaginationItem({ ...props }: React.ComponentProps<'li'>) {
 type PaginationLinkProps = {
   isActive?: boolean;
 } & Pick<React.ComponentProps<typeof Button>, 'size'> &
-  React.ComponentProps<'a'>;
+  React.ComponentProps<typeof Link>;
 
 function PaginationLink({
   className,
@@ -55,7 +56,7 @@ function PaginationLink({
       size={size}
       className={cn(className)}
     >
-      <a
+      <Link
         aria-current={isActive ? 'page' : undefined}
         data-slot="pagination-link"
         data-active={isActive}
@@ -71,7 +72,7 @@ function PaginationPrevious({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to previous page"
+      aria-label="转到上一页"
       size="default"
       className={cn('pl-1.5!', className)}
       {...props}
@@ -81,7 +82,7 @@ function PaginationPrevious({
         strokeWidth={2}
         data-icon="inline-start"
       />
-      <span className="hidden sm:block">Previous</span>
+      <span className="hidden sm:block">上一页</span>
     </PaginationLink>
   );
 }
@@ -92,12 +93,12 @@ function PaginationNext({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to next page"
+      aria-label="转到下一页"
       size="default"
       className={cn('pr-1.5!', className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
+      <span className="hidden sm:block">下一页</span>
       <HugeiconsIcon
         icon={ArrowRight01Icon}
         strokeWidth={2}
@@ -122,7 +123,7 @@ function PaginationEllipsis({
       {...props}
     >
       <HugeiconsIcon icon={MoreHorizontalCircle01Icon} strokeWidth={2} />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">更多页面</span>
     </span>
   );
 }

@@ -40,7 +40,7 @@ function getContestStatus(contest: Contest, now: dayjs.Dayjs): ContestStatus {
 function getStatusStyle(status: ContestStatus) {
   switch (status) {
     case 'running':
-      return { className: 'text-red-500', label: '进行中' as const };
+      return { className: 'text-pink-600', label: '进行中' as const };
     case 'pending':
       return { className: 'text-blue-500', label: '即将开始' as const };
     default:
@@ -78,9 +78,10 @@ function ContestRow({ contest }: { contest: Contest }) {
       : '';
 
   return (
-    <div className="space-y-1.5">
+    <div data-llm-visible="true" className="space-y-1.5">
       <div className="flex items-start justify-between gap-2">
         <p
+          data-llm-text={contest.title}
           className={cn(
             'overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap',
             statusStyle.className
@@ -89,6 +90,7 @@ function ContestRow({ contest }: { contest: Contest }) {
           {contest.title}
         </p>
         <span
+          data-llm-text={statusStyle.label}
           className={cn('shrink-0 text-xs font-medium', statusStyle.className)}
         >
           {statusStyle.label}
@@ -96,14 +98,22 @@ function ContestRow({ contest }: { contest: Contest }) {
       </div>
 
       <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-        {timeText && <MetaItem icon={Calendar01Icon}>{timeText}</MetaItem>}
+        {timeText && (
+          <MetaItem icon={Calendar01Icon}>
+            <span data-llm-text={timeText}>{timeText}</span>
+          </MetaItem>
+        )}
         <Badge variant="outline">
           <HugeiconsIcon icon={ChampionIcon} />
-          {RuleTexts[contest.rule]}
+          <span data-llm-text={RuleTexts[contest.rule]}>
+            {RuleTexts[contest.rule]}
+          </span>
         </Badge>
         <Badge variant="secondary" title="参赛人数">
           <HugeiconsIcon icon={UserGroupIcon} data-icon="inline-start" />
-          <span className="tabular-nums">{contest.attend}</span>
+          <span data-llm-text={String(contest.attend)} className="tabular-nums">
+            {contest.attend}
+          </span>
         </Badge>
         {contest.rated && (
           <Badge
@@ -112,7 +122,7 @@ function ContestRow({ contest }: { contest: Contest }) {
             title="Rated"
           >
             <HugeiconsIcon icon={StarIcon} data-icon="inline-start" />
-            Rated
+            <span data-llm-text="Rated">Rated</span>
           </Badge>
         )}
       </div>
@@ -129,11 +139,11 @@ export default function Contests({ contests }: Props) {
   });
 
   return (
-    <Card>
+    <Card data-llm-visible="true">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <HugeiconsIcon icon={Award01Icon} className="size-5" />
-          最近比赛
+          <span data-llm-text="最近比赛">最近比赛</span>
         </CardTitle>
       </CardHeader>
       <CardContent>

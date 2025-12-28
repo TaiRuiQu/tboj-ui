@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card';
-import { cn } from '@/shared/lib/utils';
 import { Clock01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import dayjs from 'dayjs';
@@ -42,20 +41,38 @@ function EventCountdown({ event }: { event: CountdownEvent }) {
 
   if (status === 'ended') return null;
 
+  if (status === 'running') {
+    return (
+      <div data-llm-visible="true" className="text-center">
+        <span
+          data-llm-text={event.name}
+          className="text-foreground mx-1 text-sm font-medium"
+        >
+          {event.name}
+        </span>
+        <span
+          data-llm-text="正在进行中"
+          className="text-pink-600 ml-1 text-sm font-bold"
+        >
+          正在进行中
+        </span>
+      </div>
+    );
+  }
+
   return (
-    <div className="text-center">
+    <div data-llm-visible="true" className="text-center">
       <span className="text-muted-foreground text-sm">距离 </span>
-      <span className="text-foreground mx-1 text-sm font-medium">
+      <span
+        data-llm-text={event.name}
+        className="text-foreground mx-1 text-sm font-medium"
+      >
         {event.name}
       </span>
-      <span className="text-muted-foreground text-sm">
-        {status === 'pending' ? '开始' : '结束'}还剩{' '}
-      </span>
+      <span className="text-muted-foreground text-sm">开始还剩 </span>
       <span
-        className={cn(
-          'ml-1 text-sm font-bold',
-          status === 'running' ? 'text-red-500' : 'text-primary'
-        )}
+        data-llm-text={timeText}
+        className="ml-1 text-sm font-bold text-primary"
       >
         {timeText}
       </span>
@@ -70,11 +87,11 @@ export default function Countdown({ config }: { config: CountdownConfig }) {
   if (!events.length) return null;
 
   return (
-    <Card>
+    <Card data-llm-visible="true">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <HugeiconsIcon icon={Clock01Icon} className="size-5" />
-          倒计时
+          <span data-llm-text="倒计时">倒计时</span>
         </CardTitle>
       </CardHeader>
       <CardContent>

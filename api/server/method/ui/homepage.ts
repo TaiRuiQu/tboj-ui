@@ -26,7 +26,16 @@ export type Discussion = ['discussion', [DiscussionDoc[], Node[]]];
 export type StarredProblems = ['starred_problems', number];
 export type RecentBlogs = ['recent_blogs', Blog[]];
 export type DiscussionNodes = ['discussion_nodes', boolean];
-export type Suggestion = ['suggestion', boolean];
+
+export type SuggestionSite = {
+  link: string;
+  title: string;
+};
+export type SuggestionSection = {
+  title: string;
+  sites: SuggestionSite[];
+};
+export type Suggestions = ['suggestions', SuggestionSection[]];
 
 export type CountdownEvent = {
   name: string;
@@ -49,7 +58,7 @@ export type SectionType =
   | StarredProblems
   | RecentBlogs
   | DiscussionNodes
-  | Suggestion
+  | Suggestions
   | Countdown;
 
 export type Content = {

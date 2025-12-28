@@ -30,16 +30,16 @@ const rgb = (r: number, g: number, b: number) => {
   return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 };
 
-export const PROBLEMS_DIFFICULTY_COLOR = {
-  0: rgb(191, 191, 191),
-  1: rgb(254, 76, 97),
-  2: rgb(243, 156, 17),
-  3: rgb(255, 193, 22),
-  4: rgb(82, 196, 26),
-  5: rgb(52, 152, 219),
-  6: rgb(157, 61, 207),
-  7: rgb(14, 29, 105),
-  8: rgb(14, 29, 105),
-  9: rgb(14, 29, 105),
-  10: rgb(14, 29, 105),
-};
+export const PROBLEMS_DIFFICULTY_COLOR = [
+  rgb(191, 191, 191),
+  rgb(254, 76, 97),
+  rgb(243, 156, 17),
+  rgb(255, 193, 22),
+  rgb(82, 196, 26),
+  rgb(52, 152, 219),
+  rgb(157, 61, 207),
+  rgb(14, 29, 105),
+  rgb(14, 29, 105),
+  rgb(14, 29, 105),
+  rgb(14, 29, 105),
+];

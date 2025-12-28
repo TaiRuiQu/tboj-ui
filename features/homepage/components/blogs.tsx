@@ -57,19 +57,25 @@ function BlogRow({ blog, udict }: { blog: Blog; udict: BaseUserDict }) {
     : '';
 
   return (
-    <div className="space-y-2">
+    <div data-llm-visible="true" className="space-y-2">
       <div className="space-y-1">
-        <p className="text-foreground overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
+        <p
+          data-llm-text={blog.title}
+          className="text-foreground overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap"
+        >
           {blog.title}
         </p>
         {excerpt && (
-          <p className="text-muted-foreground overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+          <p
+            data-llm-text={excerpt}
+            className="text-muted-foreground overflow-hidden text-sm text-ellipsis whitespace-nowrap"
+          >
             {excerpt}
           </p>
         )}
       </div>
 
-      <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+      <div className="text-muted-foreground flex items-center gap-x-3 overflow-hidden whitespace-nowrap text-xs">
         <UserSpan user={user} showAvatar />
         {blog.category && <MetaItem icon={Tag01Icon}>{blog.category}</MetaItem>}
         <MetaItem icon={EyeIcon}>{blog.views}</MetaItem>

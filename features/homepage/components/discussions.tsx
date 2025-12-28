@@ -51,15 +51,30 @@ function DiscussionRow({
     : '';
 
   return (
-    <div className="space-y-1.5">
-      <p className="text-foreground overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
+    <div data-llm-visible="true" className="space-y-1.5">
+      <p
+        data-llm-text={discussion.title}
+        className="text-foreground overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap"
+      >
         {discussion.title}
       </p>
       <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
         <UserSpan user={user} showAvatar />
-        <MetaItem icon={Comment01Icon}>{discussion.nReply}</MetaItem>
-        <MetaItem icon={EyeIcon}>{discussion.views}</MetaItem>
-        {updatedAt && <MetaItem icon={Calendar01Icon}>{updatedAt}</MetaItem>}
+        <MetaItem icon={Comment01Icon}>
+          <span data-llm-text={String(discussion.nReply)}>
+            {discussion.nReply}
+          </span>
+        </MetaItem>
+        <MetaItem icon={EyeIcon}>
+          <span data-llm-text={String(discussion.views)}>
+            {discussion.views}
+          </span>
+        </MetaItem>
+        {updatedAt && (
+          <MetaItem icon={Calendar01Icon}>
+            <span data-llm-text={updatedAt}>{updatedAt}</span>
+          </MetaItem>
+        )}
       </div>
     </div>
   );
@@ -74,11 +89,11 @@ export default function Discussions({ discussions, udict }: Props) {
   });
 
   return (
-    <Card>
+    <Card data-llm-visible="true">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <HugeiconsIcon icon={Chat01Icon} className="size-5" />
-          最近讨论
+          <span data-llm-text="最近讨论">最近讨论</span>
         </CardTitle>
       </CardHeader>
       <CardContent>

@@ -8,9 +8,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="p-4">
+      <SidebarInset className="overflow-auto p-4">
         <CollapsedTrigger />
-        <div className="container mx-auto max-w-[1500px]">
+        <div className="container mx-auto">
           <div className="mb-2 flex md:hidden px-2">
             <Link href="/home" aria-label="ZYZOJ">
               <Image
@@ -22,9 +22,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               />
             </Link>
           </div>
-          <main id="app-body">
-            <div>{children}</div>
-          </main>
+          <div id="app-body" className="pt-4">
+            {children}
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

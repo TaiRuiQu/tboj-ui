@@ -13,9 +13,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   gap = 'gap-8',
 }) => {
   return (
-    <div
-      className={cn('grid grid-cols-1 items-start p-4 md:grid-cols-10', gap)}
-    >
+    <div className={cn('grid grid-cols-1 items-start md:grid-cols-10', gap)}>
       <div className="md:col-span-7">{left}</div>
       <div className="md:col-span-3">{right}</div>
     </div>
