@@ -1,5 +1,6 @@
 'use client';
 
+import { Input } from '@/shared/components/ui/input';
 import { Search01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -24,12 +25,12 @@ export default function ProblemSearch() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="relative">
-        <input
+        <Input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="搜索题目..."
-          className="w-full rounded-md border border-input bg-background px-4 py-2 pl-10 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="h-10 pl-10 pr-4 text-sm"
         />
         <HugeiconsIcon
           icon={Search01Icon}

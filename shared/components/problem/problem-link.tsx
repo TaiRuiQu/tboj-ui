@@ -16,7 +16,9 @@ export default function ProblemLink({ problem }: Props) {
         <span className="space-x-1">
           <span data-llm-text={problem.title}>{problem.title}</span>
           {(problem as PublicProjectionProblem).hidden && (
-            <span className="text-primary" data-llm-text="(隐藏)">(隐藏)</span>
+            <span className="text-primary" data-llm-text="(隐藏)">
+              (隐藏)
+            </span>
           )}
         </span>
       </Link>

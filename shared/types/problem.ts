@@ -56,7 +56,7 @@ export type ContestDetailProjectionProblem = ContestListProjectionProblem & {
   content: string;
   html?: boolean;
   data: FileInfo[];
-  config: string | ProblemConfig;
+  config: ProblemConfig;
   additional_file: FileInfo[];
   reference?: {
     domainId: string;

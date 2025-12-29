@@ -38,10 +38,13 @@ export default function Pagination({
 
   const pagesSet = new Set<number>([
     1,
+    2,
+    safeTotalPages - 1,
     safeTotalPages,
     safePage - 1,
     safePage,
     safePage + 1,
+    safePage + 2,
   ]);
 
   const pages = Array.from(pagesSet)

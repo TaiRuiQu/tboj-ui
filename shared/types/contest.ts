@@ -73,3 +73,10 @@ export const RuleTexts = {
   homework: '作业',
   strictioi: 'IOI (严格)',
 } as const;
+
+export type ContestStatus = {
+  attend?: boolean;
+  startAt?: string;
+  endAt?: string;
+  detail?: Record<number, Record<string, unknown>>;
+};

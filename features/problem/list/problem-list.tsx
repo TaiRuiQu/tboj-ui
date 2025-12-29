@@ -63,7 +63,9 @@ export default function ProblemList({ data, showTags, searchParams }: Props) {
                 <ProblemStatus status={data.psdict[problem.docId]} />
               )}
             </TableCell>
-            <TableCell data-llm-text={String(problem.pid)}>{problem.pid}</TableCell>
+            <TableCell data-llm-text={String(problem.pid)}>
+              {problem.pid}
+            </TableCell>
             <TableCell>
               <ProblemLink problem={problem} />
             </TableCell>
