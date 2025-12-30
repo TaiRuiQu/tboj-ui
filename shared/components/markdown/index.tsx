@@ -1,6 +1,6 @@
 import './markdown.css';
 import ProblemSample from './problem-sample';
-import remarkProblemSamples from '@/markdown/plugins/remark-problem-samples';
+import remarkProblemSamples from '@/shared/components/markdown/plugins/remark-problem-samples';
 import 'katex/dist/katex.min.css';
 import MarkdownRenderer from 'react-markdown';
 import rehypeKatex from 'rehype-katex';

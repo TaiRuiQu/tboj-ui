@@ -18,8 +18,12 @@
   }
 
   /* Paragraph spacing */
-  & :where(p) {
+  & :where(p, hr) {
     margin-top: 0.75em;
     margin-bottom: 0.75em;
+  }
+
+  & :where(a) {
+    color: var(--primary);
   }
 }

@@ -1,5 +1,6 @@
 import Banner from './components/banner';
 import RecentBlogs from './components/blogs';
+import Bulletin from './components/bulletin';
 import Contests from './components/contests';
 import Countdown from './components/countdown';
 import Discussions from './components/discussions';
@@ -20,7 +21,7 @@ type ColumnProps = {
   bulletin?: string;
 };
 
-async function LeftColumn({ contents, udict }: ColumnProps) {
+async function LeftColumn({ contents, udict, bulletin }: ColumnProps) {
   return (
     <div className="space-y-6">
       {contents.banner && (
@@ -28,6 +29,7 @@ async function LeftColumn({ contents, udict }: ColumnProps) {
           <Banner banner={contents.banner} />
         </div>
       )}
+      <Bulletin bulletin={bulletin} />
       {contents.contest && <Contests contests={contents.contest[0]} />}
       {contents.discussion && (
         <Discussions discussions={contents.discussion[0]} udict={udict} />
@@ -63,7 +65,13 @@ export default async function Homepage() {
 
   return (
     <TwoColumnLayout
-      left={<LeftColumn contents={contents} udict={udict} />}
+      left={
+        <LeftColumn
+          contents={contents}
+          udict={udict}
+          bulletin={homepage.bulletin}
+        />
+      }
       right={<RightColumn contents={contents} udict={udict} />}
     />
   );

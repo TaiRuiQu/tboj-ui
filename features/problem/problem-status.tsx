@@ -41,3 +41,4 @@ export default function ProblemStatus({ status }: Props) {
     </Badge>
   );
 }
+

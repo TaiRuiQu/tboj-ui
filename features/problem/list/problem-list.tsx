@@ -1,8 +1,8 @@
 import { type ProblemListResponse } from '@/api/server/method/problems/list';
 import type { SearchParams } from '@/app/(app)/problem/(list)/page';
-import ProblemDifficulty from '@/shared/components/problem/problem-difficulty';
-import ProblemLink from '@/shared/components/problem/problem-link';
-import ProblemStatus from '@/shared/components/problem/problem-status';
+import ProblemDifficulty from '@/features/problem/problem-difficulty';
+import ProblemLink from '@/features/problem/problem-link';
+import ProblemStatus from '@/features/problem/problem-status';
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import { Progress } from '@/shared/components/ui/progress';
