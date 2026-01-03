@@ -1,10 +1,10 @@
+import UserSpan from '@/features/user/user-span';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card';
-import UserSpan from '@/shared/components/user/user-span';
 import { cn } from '@/shared/lib/utils';
 import type { Blog } from '@/shared/types/blog';
 import type { BaseUserDict } from '@/shared/types/user';

@@ -1,3 +1,4 @@
+import avatarUrl from '@/features/user/lib/avatar-url';
 import {
   Avatar,
   AvatarFallback,
@@ -8,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/components/ui/sidebar';
-import avatarUrl from '@/shared/lib/avatar-url';
 import { type User } from '@/shared/types/user';
 import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';

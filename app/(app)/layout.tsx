@@ -4,7 +4,11 @@ import { SidebarInset, SidebarProvider } from '@/shared/components/ui/sidebar';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
       <AppSidebar />

@@ -1,9 +1,9 @@
+import avatarUrl from '@/features/user/lib/avatar-url';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/shared/components/ui/avatar';
-import avatarUrl from '@/shared/lib/avatar-url';
 import { BaseUser } from '@/shared/types/user';
 import { type ComponentProps } from 'react';
 

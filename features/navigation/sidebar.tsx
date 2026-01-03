@@ -1,6 +1,6 @@
 import { SidebarUser } from './sidebar-user';
-import ServerApis from '@/api/server/method';
 import { type NavItem } from '@/api/server/method/ui/nav';
+import { getNavInfos } from '@/features/user/lib/get-user';
 import {
   Sidebar,
   SidebarContent,
@@ -97,7 +97,7 @@ const buildHref = (item: NavItem) => {
 };
 
 export default async function AppSidebar() {
-  const data = await ServerApis.UI.getNavInfos();
+  const data = await getNavInfos();
   const items = data.navItems ?? [];
   const user = data.user;
 

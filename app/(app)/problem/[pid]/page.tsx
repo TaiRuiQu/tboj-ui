@@ -1,6 +1,7 @@
 import { getProblemDetail } from '@/features/problem/detail/get-problem-detail';
 import ProblemContent from '@/features/problem/detail/problem-content';
 import ProblemTitle from '@/features/problem/detail/problem-title';
+import ProblemSidebar from '@/features/problem/sidebar';
 import TwoColumnLayout from '@/shared/layout/two-column';
 import { Metadata } from 'next';
 
@@ -32,8 +33,16 @@ export default async function ProblemDetailPage({
     <div className="space-y-6">
       <ProblemTitle problem={data.pdoc} />
       <TwoColumnLayout
+        ratio="8-2"
         left={<ProblemContent problem={data.pdoc} />}
-        right={<></>}
+        right={
+          <ProblemSidebar
+            allowSubmit={true}
+            discussionCount={data.discussionCount}
+            solutionCount={data.solutionCount}
+            problem={data.pdoc}
+          />
+        }
       />
     </div>
   );

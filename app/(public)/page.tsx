@@ -1,4 +1,4 @@
-import { getNavInfos } from '@/api/server/method/ui/nav';
+import { getUser } from '@/features/user/lib/get-user';
 import { Button } from '@/shared/components/ui/button';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function IndexPage() {
-  const { user } = await getNavInfos();
+  const user = await getUser();
   if (user._id > 0) {
     redirect('/home');
   }

@@ -1,4 +1,4 @@
-import { User } from '../types/user';
+import { BaseUser } from '../../../shared/types/user';
 
 type RGB = {
   r: number;
@@ -77,6 +77,6 @@ function getUOJColOfRating(rating: number): string {
   );
 }
 
-export default function getUsernameColor(user: User) {
-  return getUOJColOfRating(user.uojRating ?? 1500);
+export default function getUsernameColor(user: BaseUser) {
+  return getUOJColOfRating((user.uojRating as number | null) ?? 1500);
 }
