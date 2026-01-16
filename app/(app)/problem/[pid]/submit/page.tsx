@@ -1,6 +1,7 @@
 import { getProblemDetail } from '@/features/problem/detail/get-problem-detail';
 import ProblemTitle from '@/features/problem/detail/problem-title';
 import ProblemSidebar from '@/features/problem/sidebar';
+import ProblemSubmitForm from '@/features/problem/submit/problem-submit-form';
 import TwoColumnLayout from '@/shared/layout/two-column';
 import { Metadata } from 'next';
 
@@ -34,16 +35,8 @@ export default async function ProblemSubmitPage({
       <TwoColumnLayout
         ratio="8-2"
         left={
-          <div className="space-y-4" data-llm-visible="true">
-            <div className="text-2xl font-semibold" data-llm-text="提交">
-              提交
-            </div>
-            <div
-              className="text-sm text-muted-foreground"
-              data-llm-text="提交功能开发中"
-            >
-              提交功能开发中
-            </div>
+          <div data-llm-visible="true">
+            <ProblemSubmitForm problem={data.pdoc} />
           </div>
         }
         right={

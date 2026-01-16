@@ -19,7 +19,10 @@ export type SubmitLanguage = {
   display: string;
 };
 
-export type LanguageFamily = SubmitLanguage[];
+export type LanguageFamily = {
+  display: string;
+  versions: SubmitLanguage[];
+};
 
 export type AvailableLanguagesResponse = {
   languages: Record<string, LanguageFamily>;
