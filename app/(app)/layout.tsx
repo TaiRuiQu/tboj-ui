@@ -22,7 +22,7 @@ export default async function AppLayout({
                 height={32}
                 src="/nav-logo-small_light.png"
                 alt="ZYZOJ Logo"
-                className="h-auto w-[120px] dark:invert"
+                className="h-auto w-30 dark:invert"
               />
             </Link>
           </div>

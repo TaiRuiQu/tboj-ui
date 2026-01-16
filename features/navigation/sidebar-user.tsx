@@ -1,3 +1,4 @@
+import { hasPerm, hasPriv, PERM, PRIV } from '../user/lib/priv';
 import avatarUrl from '@/features/user/lib/avatar-url';
 import {
   Avatar,
@@ -19,6 +20,15 @@ export function SidebarUser({ user }: { user: User | null | undefined }) {
     redirect('/login');
   }
 
+  let modType = '用户';
+  if (user) {
+    if (hasPriv(user, PRIV.PRIV_MOD_BADGE)) {
+      modType = '超级管理员';
+    } else if (hasPerm(user, PERM.PERM_MOD_BADGE)) {
+      modType = '教练';
+    }
+  }
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -34,7 +44,9 @@ export function SidebarUser({ user }: { user: User | null | undefined }) {
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">{user.uname}</span>
-            <span className="truncate text-xs">{user.mail}</span>
+            <span className="truncate text-xs text-muted-foreground">
+              {modType}
+            </span>
           </div>
           <HugeiconsIcon icon={ArrowDown01Icon} className="ml-auto size-4" />
         </SidebarMenuButton>

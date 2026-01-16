@@ -16,7 +16,9 @@ export default function ProblemDifficulty({ difficulty }: Props) {
 
   return (
     <Badge style={{ backgroundColor: bgColor }}>
-      <span data-llm-text={label}>{label}</span>
+      <span className="text-white" data-llm-text={label}>
+        {label}
+      </span>
     </Badge>
   );
 }

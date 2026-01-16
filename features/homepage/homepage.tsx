@@ -69,7 +69,7 @@ export default async function Homepage() {
         <LeftColumn
           contents={contents}
           udict={udict}
-          bulletin={homepage.bulletin}
+          bulletin={homepage.domain.bulletin}
         />
       }
       right={<RightColumn contents={contents} udict={udict} />}

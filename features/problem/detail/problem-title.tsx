@@ -1,4 +1,5 @@
 import { ProblemTags } from './problem-tags';
+import ProblemDifficulty from '@/features/problem/problem-difficulty';
 import { Badge } from '@/shared/components/ui/badge';
 import { formatMemory, formatTime } from '@/shared/lib/format-units';
 import type { PublicProjectionProblem } from '@/shared/types/problem';
@@ -52,6 +53,7 @@ export default function ProblemTitle({ problem }: Props) {
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-2">
+          <ProblemDifficulty difficulty={problem.difficulty} />
           <Badge variant="secondary">
             <HugeiconsIcon
               strokeWidth={2}

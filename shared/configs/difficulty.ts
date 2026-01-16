@@ -31,7 +31,7 @@ const rgb = (r: number, g: number, b: number) => {
 };
 
 export const PROBLEMS_DIFFICULTY_COLOR = [
-  rgb(191, 191, 191),
+  rgb(160, 160, 160),
   rgb(254, 76, 97),
   rgb(243, 156, 17),
   rgb(255, 193, 22),

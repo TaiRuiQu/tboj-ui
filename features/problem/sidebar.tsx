@@ -2,6 +2,7 @@ import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import type { ContestListProjectionProblem } from '@/shared/types/problem';
 import {
+  ArrowLeftIcon,
   Book03Icon,
   Chat01Icon,
   File01Icon,
@@ -12,6 +13,7 @@ import Link from 'next/link';
 
 type Props = {
   allowSubmit?: boolean;
+  showBackToProblem?: boolean;
 
   discussionCount?: number;
   solutionCount?: number;
@@ -48,6 +50,7 @@ function SidebarButton({ icon, text, href, count }: SidebarButtonProps) {
 
 export default function ProblemSidebar({
   allowSubmit,
+  showBackToProblem,
   discussionCount,
   solutionCount,
   problem,
@@ -63,6 +66,17 @@ export default function ProblemSidebar({
             <Link href={`/problem/${problem.pid ?? problem.docId}/submit`}>
               <HugeiconsIcon icon={Navigation03Icon} strokeWidth={2} />
               <span data-llm-text="提交">提交</span>
+            </Link>
+          </Button>
+        )}
+        {showBackToProblem && (
+          <Button
+            asChild
+            className="h-10 w-full justify-start gap-3 rounded-none px-4"
+          >
+            <Link href={`/problem/${problem.pid ?? problem.docId}`}>
+              <HugeiconsIcon icon={ArrowLeftIcon} strokeWidth={2} />
+              <span data-llm-text="返回题目">返回题目</span>
             </Link>
           </Button>
         )}

@@ -1,4 +1,4 @@
-import type { User } from "@/shared/types/user";
+import type { User } from '@/shared/types/user';
 
 export const PERM = {
   PERM_NONE: BigInt(0),
