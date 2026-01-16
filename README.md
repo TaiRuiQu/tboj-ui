@@ -1,3 +1,5 @@
+[![Lint](https://github.com/TaiRuiQu/tboj-ui/actions/workflows/lint.yml/badge.svg)](https://github.com/TaiRuiQu/tboj-ui/actions/workflows/lint.yml)
+
 ## 项目简介
 
 这是一个大型在线测评系统 (ZYZOJ) 的前端项目，负责提供用户界面和交互功能。采用 Next.js 框架，实现 SSR 等功能。
