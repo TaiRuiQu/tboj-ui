@@ -1,0 +1,277 @@
+'use client';
+
+import { submitSolution } from './action';
+import { LanguageFamily } from '@/api/server/method/problems/submit';
+import { Button } from '@/shared/components/ui/button';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/shared/components/ui/field';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/ui/select';
+import { Textarea } from '@/shared/components/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Navigation03Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { z } from 'zod';
+
+type Props = {
+  pid: string;
+  languages: Record<string, LanguageFamily>;
+};
+
+const baseSchema = z.object({
+  familyKey: z.string().min(1, '请选择语言'),
+  lang: z.string().min(1, '请选择版本'),
+  code: z.string().trim().min(1, '请输入代码'),
+});
+
+type FormValues = z.infer<typeof baseSchema>;
+
+export default function ProblemSubmitFormClient({ pid, languages }: Props) {
+  const router = useRouter();
+
+  const preferredFamilyKey = 'cc';
+  const preferredLang = 'cc.cc14o2';
+
+  console.log(languages);
+
+  const defaultFamilyKey = useMemo(() => {
+    if (languages[preferredFamilyKey]) return preferredFamilyKey;
+    return Object.keys(languages)[0] ?? '';
+  }, [languages]);
+
+  const defaultLang = useMemo(() => {
+    const family = defaultFamilyKey ? languages[defaultFamilyKey] : undefined;
+    if (!family) return '';
+
+    if (
+      defaultFamilyKey === preferredFamilyKey &&
+      family.versions.some((v) => v.name === preferredLang)
+    ) {
+      return preferredLang;
+    }
+
+    return family.versions[0]?.name ?? '';
+  }, [defaultFamilyKey, languages, preferredFamilyKey, preferredLang]);
+
+  const schema = useMemo(
+    () =>
+      baseSchema.superRefine(
+        (values: z.infer<typeof baseSchema>, ctx: z.RefinementCtx) => {
+          const family = languages[values.familyKey];
+          if (!family) {
+            ctx.addIssue({
+              code: 'custom',
+              path: ['familyKey'],
+              message: '请选择语言',
+            });
+            return;
+          }
+
+          if (!family.versions.some((v) => v.name === values.lang)) {
+            ctx.addIssue({
+              code: 'custom',
+              path: ['lang'],
+              message: '请选择版本',
+            });
+          }
+        }
+      ),
+    [languages]
+  );
+
+  const {
+    control,
+    register,
+    getValues,
+    setValue,
+    setError,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      familyKey: defaultFamilyKey,
+      lang: defaultLang,
+      code: '',
+    },
+  });
+
+  const familyKey = useWatch({ control, name: 'familyKey' }) ?? '';
+  const selectedFamily = familyKey ? languages[familyKey] : undefined;
+
+  useEffect(() => {
+    if (getValues('familyKey')) return;
+    if (!defaultFamilyKey) return;
+
+    setValue('familyKey', defaultFamilyKey, { shouldValidate: true });
+    setValue('lang', defaultLang, { shouldValidate: true });
+  }, [defaultFamilyKey, defaultLang, getValues, setValue]);
+
+  useEffect(() => {
+    const currentLang = getValues('lang');
+    const versions = selectedFamily?.versions ?? [];
+
+    if (!selectedFamily) {
+      if (currentLang) {
+        setValue('lang', '', { shouldValidate: true });
+      }
+      return;
+    }
+
+    const stillValid = versions.some((v) => v.name === currentLang);
+    if (stillValid) return;
+
+    const nextLang =
+      familyKey === preferredFamilyKey &&
+      versions.some((v) => v.name === preferredLang)
+        ? preferredLang
+        : (versions[0]?.name ?? '');
+
+    setValue('lang', nextLang, { shouldValidate: true });
+  }, [
+    familyKey,
+    getValues,
+    preferredFamilyKey,
+    preferredLang,
+    selectedFamily,
+    setValue,
+  ]);
+
+  const onSubmit = async (values: FormValues) => {
+    const res = await submitSolution(pid, {
+      lang: values.lang,
+      code: values.code,
+    });
+
+    if (res.success && res.data?.rid) {
+      router.push(`/record/${res.data.rid}`);
+      return;
+    }
+
+    setError('root.serverError', {
+      type: 'server',
+      message: res.error || '提交失败',
+    });
+  };
+
+  return (
+    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <FieldGroup>
+        <div className="flex flex-wrap gap-6">
+          <Controller
+            control={control}
+            name="familyKey"
+            render={({ field }) => (
+              <Field className="w-auto flex-none">
+                <FieldLabel htmlFor="family-select">语言</FieldLabel>
+                <FieldContent>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    disabled={isSubmitting}
+                  >
+                    <SelectTrigger
+                      id="family-select"
+                      aria-invalid={!!errors.familyKey}
+                      className="w-60"
+                    >
+                      <SelectValue placeholder="选择语言" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.entries(languages).map(([key, fam]) => (
+                        <SelectItem key={key} value={key}>
+                          {fam.display}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FieldError errors={[errors.familyKey]} />
+                </FieldContent>
+              </Field>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="lang"
+            render={({ field }) => (
+              <Field className="w-auto flex-none">
+                <FieldLabel htmlFor="version-select">版本</FieldLabel>
+                <FieldContent>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    disabled={!selectedFamily || isSubmitting}
+                  >
+                    <SelectTrigger
+                      id="version-select"
+                      aria-invalid={!!errors.lang}
+                      className="w-60"
+                    >
+                      <SelectValue placeholder="选择版本" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {selectedFamily?.versions.map((l) => (
+                        <SelectItem key={l.name} value={l.name}>
+                          {l.display}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FieldError errors={[errors.lang]} />
+                </FieldContent>
+              </Field>
+            )}
+          />
+        </div>
+
+        <Field>
+          <FieldLabel htmlFor="code-input">代码</FieldLabel>
+          <FieldContent>
+            <Textarea
+              id="code-input"
+              placeholder="在此粘贴代码..."
+              className="min-h-[320px] max-h-[600px] font-mono"
+              aria-invalid={!!errors.code}
+              disabled={isSubmitting}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
+              {...register('code')}
+            />
+            <FieldError errors={[errors.code]} />
+          </FieldContent>
+        </Field>
+      </FieldGroup>
+
+      <FieldError errors={[errors.root?.serverError]} />
+
+      <Button
+        size="lg"
+        type="submit"
+        className="w-30 gap-3"
+        disabled={isSubmitting}
+      >
+        <HugeiconsIcon
+          icon={Navigation03Icon}
+          strokeWidth={2}
+          data-icon="inline-start"
+        />
+        {isSubmitting ? '提交中...' : '提交'}
+      </Button>
+    </form>
+  );
+}

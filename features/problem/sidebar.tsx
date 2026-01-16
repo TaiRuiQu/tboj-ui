@@ -32,7 +32,7 @@ function SidebarButton({ icon, text, href, count }: SidebarButtonProps) {
   return (
     <Button
       asChild
-      className="h-10 w-full justify-start gap-3 rounded-none px-4"
+      className="h-10 w-full justify-start gap-3 px-4"
       variant="ghost"
     >
       <Link href={href}>
@@ -57,12 +57,9 @@ export default function ProblemSidebar({
 }: Props) {
   return (
     <div className="w-full">
-      <div className="border-l">
+      <div>
         {allowSubmit && (
-          <Button
-            asChild
-            className="h-10 w-full justify-start gap-3 rounded-none px-4"
-          >
+          <Button asChild className="h-10 w-full justify-start gap-3 px-4">
             <Link href={`/problem/${problem.pid ?? problem.docId}/submit`}>
               <HugeiconsIcon icon={Navigation03Icon} strokeWidth={2} />
               <span data-llm-text="提交">提交</span>
@@ -70,10 +67,7 @@ export default function ProblemSidebar({
           </Button>
         )}
         {showBackToProblem && (
-          <Button
-            asChild
-            className="h-10 w-full justify-start gap-3 rounded-none px-4"
-          >
+          <Button asChild className="h-10 w-full justify-start gap-3 px-4">
             <Link href={`/problem/${problem.pid ?? problem.docId}`}>
               <HugeiconsIcon icon={ArrowLeftIcon} strokeWidth={2} />
               <span data-llm-text="返回题目">返回题目</span>
