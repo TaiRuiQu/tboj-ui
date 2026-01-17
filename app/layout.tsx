@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const siteName = process.env.SITE_NAME ?? '';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - ZYZOJ',
-    default: 'ZYZOJ',
+    template: `%s - ${siteName}`,
+    default: siteName,
   },
   description:
     'A modern, AI-ready online judge platform for competitive programmers.',

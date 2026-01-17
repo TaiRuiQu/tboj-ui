@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function IndexPage() {
+  const siteName = process.env.SITE_NAME ?? '';
   const user = await getUser();
   if (user._id > 0) {
     redirect('/home');
@@ -24,7 +25,7 @@ export default async function IndexPage() {
         <header className="flex items-center justify-between -ml-4">
           <Image
             src="/nav-logo-small_light.png"
-            alt="ZYZOJ Logo"
+            alt={`${siteName} Logo`}
             width={160}
             height={44}
             priority
@@ -44,7 +45,7 @@ export default async function IndexPage() {
             </h1>
             <p className="max-w-prose text-pretty text-base text-muted-foreground sm:text-lg">
               准备好在{' '}
-              <span className="font-medium text-foreground">ZYZOJ</span>{' '}
+              <span className="font-medium text-foreground">{siteName}</span>{' '}
               上体验深度集成的人工智能所带来的高效学习。
             </p>
           </div>

@@ -9,6 +9,7 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const siteName = process.env.SITE_NAME ?? '';
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -16,12 +17,12 @@ export default async function AppLayout({
         <CollapsedTrigger />
         <div className="container mx-auto">
           <div className="mb-2 flex md:hidden px-2">
-            <Link href="/home" aria-label="ZYZOJ">
+            <Link href="/home" aria-label={siteName}>
               <Image
                 width={120}
                 height={32}
                 src="/nav-logo-small_light.png"
-                alt="ZYZOJ Logo"
+                alt={`${siteName} Logo`}
                 className="h-auto w-30 dark:invert"
               />
             </Link>

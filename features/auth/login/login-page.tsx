@@ -29,6 +29,8 @@ type LoginFormValues = {
   rememberme: boolean;
 };
 
+const siteName = process.env.SITE_NAME ?? '';
+
 export function LoginPage() {
   const searchParams = useSearchParams();
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -104,7 +106,7 @@ export function LoginPage() {
       <div className="flex w-full max-w-md flex-col items-center gap-6">
         <Image
           src="/nav-logo-small_light.png"
-          alt="ZYZOJ Logo"
+          alt={`${siteName} Logo`}
           width={160}
           height={44}
           priority
@@ -114,7 +116,7 @@ export function LoginPage() {
         <Card className="w-full">
           <CardHeader>
             <CardTitle>登录</CardTitle>
-            <CardDescription>登录后即可开始使用 ZYZOJ。</CardDescription>
+            <CardDescription>登录后即可开始使用 {siteName}。</CardDescription>
           </CardHeader>
 
           <CardContent>
