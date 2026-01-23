@@ -4,6 +4,8 @@ export type HydroError = {
   name: string;
 };
 
-export type Errorable<T> = T | {
-  error: HydroError;
-};
+export type Errorable<T> =
+  | T
+  | {
+      error: HydroError;
+    };
