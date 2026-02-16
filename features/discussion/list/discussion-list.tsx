@@ -10,15 +10,8 @@ import {
 } from '@/shared/components/ui/empty';
 import { Separator } from '@/shared/components/ui/separator';
 import type { Discussion } from '@/shared/types/discussion';
-import {
-  Comment01Icon,
-  EyeIcon,
-  PinIcon,
-  SearchList02Icon,
-  StarAward01Icon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import dayjs from 'dayjs';
+import { MessageCircle, Eye, Pin, Search, Star } from 'lucide-react';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
@@ -65,7 +58,7 @@ function DiscussionItem({
                   variant="secondary"
                   className="mr-2 bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
                 >
-                  <HugeiconsIcon icon={PinIcon} data-icon="inline-start" />
+                  <Pin data-icon="inline-start" />
                   置顶
                 </Badge>
               )}
@@ -74,10 +67,7 @@ function DiscussionItem({
                   variant="secondary"
                   className="mr-2 bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400"
                 >
-                  <HugeiconsIcon
-                    icon={StarAward01Icon}
-                    data-icon="inline-start"
-                  />
+                  <Star data-icon="inline-start" />
                   精华
                 </Badge>
               )}
@@ -91,7 +81,7 @@ function DiscussionItem({
                 <span data-llm-text={nodeTitle}>{nodeTitle}</span>
               </Badge>
               <Badge variant="secondary" title="回复数">
-                <HugeiconsIcon icon={Comment01Icon} data-icon="inline-start" />
+                <MessageCircle data-icon="inline-start" />
                 <span
                   data-llm-text={String(discussion.nReply)}
                   className="tabular-nums"
@@ -100,7 +90,7 @@ function DiscussionItem({
                 </span>
               </Badge>
               <Badge variant="secondary" title="浏览量">
-                <HugeiconsIcon icon={EyeIcon} data-icon="inline-start" />
+                <Eye data-icon="inline-start" />
                 <span
                   data-llm-text={String(discussion.views)}
                   className="tabular-nums"
@@ -124,7 +114,7 @@ export default function DiscussionList({ data }: Props) {
     return (
       <Empty className="border border-dashed" data-llm-visible="true">
         <EmptyMedia variant="icon">
-          <HugeiconsIcon icon={SearchList02Icon} strokeWidth={2} />
+          <Search strokeWidth={2} />
         </EmptyMedia>
         <EmptyHeader>
           <EmptyTitle data-llm-text="暂无讨论">暂无讨论</EmptyTitle>
