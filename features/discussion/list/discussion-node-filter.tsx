@@ -9,8 +9,7 @@ import {
   SelectValue,
 } from '@/shared/components/ui/select';
 import type { Node } from '@/shared/types/discussion';
-import { Add01Icon, Tag01Icon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
+import { Plus, Tag } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
@@ -51,10 +50,7 @@ export default function DiscussionNodeFilter({ vnodes }: Props) {
       <Select value={currentNode} onValueChange={handleNodeChange}>
         <SelectTrigger className="w-64 min-w-[256px]">
           <div className="flex items-center gap-2">
-            <HugeiconsIcon
-              icon={Tag01Icon}
-              className="size-4 text-muted-foreground"
-            />
+            <Tag className="size-4 text-muted-foreground" />
             <SelectValue placeholder="讨论节点" />
           </div>
         </SelectTrigger>
@@ -74,7 +70,7 @@ export default function DiscussionNodeFilter({ vnodes }: Props) {
             href={`/discussion/create?node=${currentNode}`}
             className="gap-2"
           >
-            <HugeiconsIcon icon={Add01Icon} strokeWidth={2} />
+            <Plus strokeWidth={2} />
             创建讨论
           </Link>
         </Button>
