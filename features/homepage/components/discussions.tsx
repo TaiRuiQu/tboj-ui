@@ -10,6 +10,7 @@ import type { Discussion } from '@/shared/types/discussion';
 import type { BaseUserDict } from '@/shared/types/user';
 import dayjs from 'dayjs';
 import { Calendar, MessageCircle, Eye, type LucideIcon } from 'lucide-react';
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -50,7 +51,12 @@ function DiscussionRow({
         data-llm-text={discussion.title}
         className="text-foreground overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap"
       >
-        {discussion.title}
+        <Link
+          href={`/discussion/${discussion.docId}`}
+          className="hover:underline"
+        >
+          {discussion.title}
+        </Link>
       </p>
       <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
         <UserSpan user={user} showAvatar />
