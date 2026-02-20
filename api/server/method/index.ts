@@ -4,6 +4,7 @@ import Contests from './contests';
 import Discussion from './discussion';
 import Homework from './homework';
 import Problems from './problems';
+import Ranking from './ranking';
 import Record from './record';
 import Training from './training';
 import UI from './ui';
@@ -16,6 +17,7 @@ const ServerApis = {
   Contests,
   Homework,
   Training,
+  Ranking,
 };
 
 export default ServerApis;
