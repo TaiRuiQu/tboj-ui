@@ -8,6 +8,7 @@ import Ranking from './ranking';
 import Record from './record';
 import Training from './training';
 import UI from './ui';
+import User from './user';
 
 const ServerApis = {
   UI,
@@ -18,6 +19,7 @@ const ServerApis = {
   Homework,
   Training,
   Ranking,
+  User,
 };
 
 export default ServerApis;
